@@ -42,8 +42,8 @@ envsubst < /opt/app-root/etc/php.d/10-opcache.ini.template > /etc/opt/rh/rh-php5
   #echo "-> Cgroups memory limit is set, using HTTPD_MAX_REQUEST_WORKERS=${HTTPD_MAX_REQUEST_WORKERS}"
 #fi
 
-#envsubst < /opt/app-root/etc/conf.d/50-mpm-tuning.conf.template > /opt/app-root/etc/conf.d/50-mpm-tuning.conf
-#envsubst < /opt/app-root/etc/conf.d/00-documentroot.conf.template > /opt/app-root/etc/conf.d/00-documentroot.conf
+envsubst < /opt/app-root/etc/fpm.conf > /opt/app-root/etc/fpm.conf
+envsubst < /opt/app-root/etc/pool.conf > /opt/app-root/etc/pool.conf
 
 #exec httpd -D FOREGROUND
 

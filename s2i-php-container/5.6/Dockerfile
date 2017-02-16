@@ -29,6 +29,8 @@ RUN yum install --setopt=tsflags=nodocs -y centos-release-scl-rh && \
     yum install --setopt=tsflags=nodocs -y bcrypt rh-nginx${NGINX_VERSION/\./} && \
     yum clean all -y && \
     mkdir -p /opt/app-root/etc/nginx.conf.d /opt/app-root/run && \
+    mkdir -p /opt/app-root/etc/php-fpm.d/www.conf /opt/app-root/run && \
+    mkdir -p /opt/app-root/etc/php-fpm.conf /opt/app-root/run && \
     chmod -R a+rx  $NGINX_VAR_DIR/lib/nginx && \
     chmod -R a+rwX $NGINX_VAR_DIR/lib/nginx/tmp \
                    $NGINX_VAR_DIR/log \
@@ -38,7 +40,7 @@ RUN yum install --setopt=tsflags=nodocs -y centos-release-scl-rh && \
 
 # Install Apache httpd and PHP
 RUN yum install -y centos-release-scl && \
-    INSTALL_PKGS="rh-php56 rh-php56-php rh-php56-php-mysqlnd rh-php56-php-pgsql rh-php56-php-bcmath \
+    INSTALL_PKGS="rh-php56 rh-php56-php rh-php56-php-fpm rh-php56-php-mysqlnd rh-php56-php-pgsql rh-php56-php-bcmath \
                   rh-php56-php-gd rh-php56-php-intl rh-php56-php-ldap rh-php56-php-mbstring rh-php56-php-pdo \
                   rh-php56-php-pecl-memcache rh-php56-php-process rh-php56-php-soap rh-php56-php-opcache rh-php56-php-xml \
                   rh-php56-php-pecl-xdebug rh-php56-php-gmp" && \
@@ -71,10 +73,12 @@ RUN    chmod -R ug+rwx /opt/app-root && \
     chmod -R a+rwx /opt/rh/rh-nginx18/root
     
     #nginx
-    RUN cp /opt/app-root/etc/nginx.server.sample.conf /opt/app-root/etc/nginx.conf.d/default.conf && \
-    chown -R 1001:1001 /opt/app-root
+RUN cp /opt/app-root/etc/nginx.server.sample.conf /opt/app-root/etc/nginx.conf.d/default.conf && \   
+cp /opt/app-root/etc/pool.conf /opt/app-root/etc/php-fpm.d/www.conf && \
+cp /opt/app-root/etc/fpm.conf /opt/app-root/etc/php-fpm.conf && \
+     chown -R 1001:1001 /opt/app-root
 
-USER 1001
+	USER 1001
 
 # Set the default CMD to print the usage of the language image
 CMD $STI_SCRIPTS_PATH/usage

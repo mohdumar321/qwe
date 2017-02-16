@@ -48,6 +48,8 @@ copy_static_files() {
 }
 
 copy_default_config() {
+    cp /opt/app-root/etc/fpm.conf /opt/app-root/etc/php-fpm.conf
+    cp /opt/app-root/etc/pool.conf /opt/app-root/etc/php-fpm.d/www.conf
     cp /opt/app-root/etc/nginx.server.sample.conf /opt/app-root/etc/nginx.conf.d/default.conf
 }
 

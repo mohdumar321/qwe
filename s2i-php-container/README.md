@@ -1,4 +1,4 @@
-PHP1 Docker images
+PHP Docker images
 =================
 
 This repository contains the source for building various versions of
