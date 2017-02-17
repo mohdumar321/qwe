@@ -49,7 +49,7 @@ envsubst < /opt/app-root/etc/conf.d/php-fpm/pool.conf > /etc/opt/rh/rh-php56/poo
 export_vars=$(cgroup-limits); export $export_vars
 exec /opt/app-root/services.sh
 #nginx
-NGINX_CONF=${NGINX_CONF-/opt/app-root/etc/nginx.conf}
+NGINX_CONF=${NGINX_CONF-/opt/app-root/etc/conf.d/nginx/nginx.conf}
 exec ${NGINX_BASE_DIR}/usr/sbin/nginx -c "$NGINX_CONF"
 
 
