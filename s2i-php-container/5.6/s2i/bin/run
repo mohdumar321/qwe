@@ -42,11 +42,12 @@ envsubst < /opt/app-root/etc/php.d/10-opcache.ini.template > /etc/opt/rh/rh-php5
   #echo "-> Cgroups memory limit is set, using HTTPD_MAX_REQUEST_WORKERS=${HTTPD_MAX_REQUEST_WORKERS}"
 #fi
 
-envsubst < /opt/app-root/etc/fpm.conf > /opt/app-root/etc/fpm.conf
-envsubst < /opt/app-root/etc/pool.conf > /opt/app-root/etc/pool.conf
+envsubst < /opt/app-root/etc/conf.d/php-fpm/fpm.conf > /etc/opt/rh/rh-php56/fpm.conf
+envsubst < /opt/app-root/etc/conf.d/php-fpm/pool.conf > /etc/opt/rh/rh-php56/pool.conf
 
 #exec httpd -D FOREGROUND
-
+export_vars=$(cgroup-limits); export $export_vars
+exec /opt/app-root/services.sh
 #nginx
 NGINX_CONF=${NGINX_CONF-/opt/app-root/etc/nginx.conf}
 exec ${NGINX_BASE_DIR}/usr/sbin/nginx -c "$NGINX_CONF"
