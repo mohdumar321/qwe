@@ -58,7 +58,7 @@ COPY ./s2i/bin/ $STI_SCRIPTS_PATH
 
 # Each language image can have 'contrib' a directory with extra files needed to
 # run and build the applications.
-COPY ./contrib/etc /opt/app-root/etc
+COPY ./contrib/ /opt/app-root
 
 # In order to drop the root user, we have to make some directories world
 # writeable as OpenShift default security model is to run the container under
