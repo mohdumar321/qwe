@@ -74,10 +74,11 @@ RUN    chmod -R ug+rwx /opt/app-root && \
     
     #nginx
 RUN cp /opt/app-root/etc/nginx.server.sample.conf /opt/app-root/etc/nginx.conf.d/default.conf && \   
-cp /opt/app-root/etc/pool.conf /opt/app-root/etc/php-fpm.d/www.conf && \
-cp /opt/app-root/etc/fpm.conf /opt/app-root/etc/php-fpm.conf && \
+cp /opt/app-root/etc/conf.d/php-fpm/pool.conf /etc/php-fpm.d/www.conf && \
+ cp /opt/app-root/etc/conf.d/php-fpm/fpm.conf /etc/php-fpm.conf && \
      chown -R 1001:1001 /opt/app-root
 RUN chmod -R a+rwx /opt/app-root/etc
+
 	USER 1001
 
 # Set the default CMD to print the usage of the language image
