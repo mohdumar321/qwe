@@ -31,6 +31,8 @@ RUN yum install --setopt=tsflags=nodocs -y centos-release-scl-rh && \
     mkdir -p /opt/app-root/etc/nginx.conf.d /opt/app-root/run && \
     mkdir -p /opt/app-root/etc/php-fpm.d/www.conf /opt/app-root/run && \
     mkdir -p /opt/app-root/etc/php-fpm.conf /opt/app-root/run && \
+    mkdir -p /etc/php-fpm.d/www.conf && \
+    mkdir -p /etc/php-fpm.conf &&\
     chmod -R a+rx  $NGINX_VAR_DIR/lib/nginx && \
     chmod -R a+rwX $NGINX_VAR_DIR/lib/nginx/tmp \
                    $NGINX_VAR_DIR/log \
@@ -73,11 +75,12 @@ RUN    chmod -R ug+rwx /opt/app-root && \
     chmod -R a+rwx /opt/rh/rh-nginx18/root
     
     #nginx
-RUN cp /opt/app-root/etc/nginx.server.sample.conf /opt/app-root/etc/nginx.conf.d/default.conf && \   
+RUN cp /opt/app-root/etc/conf.d/nginx/servers/default /opt/app-root/etc/nginx.conf.d/default.conf && \   
 cp /opt/app-root/etc/conf.d/php-fpm/pool.conf /etc/php-fpm.d/www.conf && \
  cp /opt/app-root/etc/conf.d/php-fpm/fpm.conf /etc/php-fpm.conf && \
      chown -R 1001:1001 /opt/app-root
 RUN chmod -R a+rwx /opt/app-root/etc
+RUN chmod -R a+rwx /etc
 
 	USER 1001
 
