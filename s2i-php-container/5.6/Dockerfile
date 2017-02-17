@@ -75,6 +75,20 @@ RUN    chmod -R ug+rwx /opt/app-root && \
     chmod -R a+rwx /opt/rh/rh-nginx18/root
     
     #nginx
+    RUN mkdir /tmp/sessions && \
+    mkdir -p /var/lib/nginx && \
+    mkdir -p /var/log/nginx && \
+    touch /var/log/nginx/error.log && \
+    touch /var/log/nginx/access.log && \
+    chown -R 1001:0 /var/log/nginx && \
+    chown -R 1001:0 /var/lib/nginx && \
+    chown -R 1001:0 /opt/app-root /tmp/sessions && \
+    chmod -R a+rwx /tmp/sessions && \
+    chmod -R a+rwx /var/log/nginx && \
+    chmod -R a+rwx /var/lib/nginx && \
+    chmod -R ug+rwx /var/log/nginx && \
+    chmod -R ug+rwx /var/lib/nginx
+    
 RUN cp /opt/app-root/etc/conf.d/nginx/servers/default /opt/app-root/etc/nginx.conf.d/default.conf && \   
 cp /opt/app-root/etc/conf.d/php-fpm/pool.conf /etc/php-fpm.d/www.conf && \
  cp /opt/app-root/etc/conf.d/php-fpm/fpm.conf /etc/php-fpm.conf && \
