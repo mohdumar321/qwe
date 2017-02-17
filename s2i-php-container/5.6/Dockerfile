@@ -81,6 +81,7 @@ cp /opt/app-root/etc/conf.d/php-fpm/pool.conf /etc/php-fpm.d/www.conf && \
      chown -R 1001:1001 /opt/app-root
 RUN chmod -R a+rwx /opt/app-root/etc
 RUN chmod -R a+rwx /etc
+Run chmod +x /opt/app-root/services.sh
 
 	USER 1001
 
